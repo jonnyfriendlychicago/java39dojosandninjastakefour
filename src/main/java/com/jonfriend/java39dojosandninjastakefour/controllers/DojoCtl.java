@@ -108,7 +108,6 @@ public class DojoCtl {
 		List<DojoMdl> intVar = dojoSrv.returnAll();
 		model.addAttribute("dojoList", intVar); 
 		return "dojo/list.jsp"; 
-		// list
 	}
 	
 	// display list, then process the new 

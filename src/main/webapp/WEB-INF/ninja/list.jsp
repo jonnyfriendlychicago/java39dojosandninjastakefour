@@ -34,29 +34,25 @@
 		<thead>
 			<tr>
 				<th scope="col">id</th>
-				<th scope="col">number</th>
-				<!-- <th scope="col">expirationDate</th> -->
-				<th scope="col">state</th>
-				<th scope="col">dojoSTuff!</th>
-
+				<th scope="col">firstName</th>
+				<th scope="col">lastName</th>
+				<th scope="col">dojoStuff!</th>
 				<th scope="col">actions</th>
 			</tr>
 		</thead>
 		<tbody>
 			<c:forEach var="record" items="${ninjaList}">
 				<tr>
-					<td><a href="/ninjaplus/${record.id}">${record.id}</a></td>
-					<td>${record.ninjaNumber}</td>
-					<%-- <td>${record.expirationDate}</td> --%>
-					<td>${record.issuingState}</td>
-					
-					<td>${record.dojoMdl.firstName} ${record.dojoMdl.lastName}</td>
+					<td><a href="/ninja/${record.id}">${record.id}</a></td>
+					<td>${record.firstName}</td>
+					<td>${record.lastName}</td>
+					<td>${record.dojoMdl.dojoName} </td>
 
 
 
-					<td><a href="/ninjaplus/${record.id}/edit">Edit</a>
+					<td><a href="/ninja/${record.id}/edit">Edit</a>
 
-						<form action="/ninjaplus/${record.id}" method="post">
+						<form action="/ninja/${record.id}" method="post">
 							<input type="hidden" name="_method" value="delete"> <input
 								type="submit" value="Delete">
 						</form></td>
@@ -67,23 +63,19 @@
 
 	<h2>Add new ninja</h2>
 
-	<form:form action='/ninjaplus' method='post' modelAttribute='ninja'>
+	<form:form action='/ninja' method='post' modelAttribute='ninja'>
 
 		<div class="form-group">
-			<form:label path="ninjaNumber" for="ninjaNumber">ninjaNumber</form:label>
-			<form:input type="text" class="form-control" path="ninjaNumber"
-				aria-describedby="ninjaNumberHelp" />
-			<p class="errorText">
-				<form:errors path="ninjaNumber" />
+			<form:label path="firstName" for="firstName">firstName</form:label>
+			<form:input type="text" class="form-control" path="firstName"/>
+			<p class="errorText"><form:errors path="firstName" />
 			</p>
 		</div>
 
 		<div class="form-group">
-			<form:label path="issuingState" for="issuingState">issuingState</form:label>
-			<form:input type="text" class="form-control" path="issuingState" />
-			<p class="errorText">
-				<form:errors path="issuingState" />
-			</p>
+			<form:label path="lastName" for="lastName">lastName</form:label>
+			<form:input type="text" class="form-control" path="lastName" />
+			<p class="errorText"><form:errors path="lastName" /></p>
 		</div>
 
 		<div class="form-group">
@@ -92,15 +84,11 @@
 					<!--- Each option VALUE is the id of the dojo --->
 					<form:option value="${record.id}" path="dojoMdl">
 						<!--- This is what shows to the user as the option --->
-						<c:out value="${record.firstName}" />
-
+						<c:out value="${record.dojoName}" />
 					</form:option>
 				</c:forEach>
 			</form:select>
 		</div>
-
-
-
 
 		<button type="submit" class="btn btn-primary">Submit</button>
 	</form:form>

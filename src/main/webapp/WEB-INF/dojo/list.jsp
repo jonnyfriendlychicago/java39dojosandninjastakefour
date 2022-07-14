@@ -33,9 +33,9 @@
 	  <thead>
 	    <tr>
 			<th scope="col">id</th>
-	      	<th scope="col">firstName</th>
-	      	<th scope="col">lastName</th>
-	      	<th scope="col">license State - Num!</th>
+	      	<th scope="col">dojoName</th>
+	      	<!-- <th scope="col">lastName</th>
+	      	<th scope="col">license State - Num!</th> -->
 	      	
 			<th scope="col">Actions</th> 
 	    </tr>
@@ -44,17 +44,16 @@
 	    <c:forEach var="record" items="${dojoList}">
 	        <tr>
 		      <td >
-		      	<a href= "/dojoplus/${record.id}">${record.id}</a>
+		      	<a href= "/dojo/${record.id}">${record.id}</a>
 		      </td>
-		      <td>${record.firstName}</td>
-		      <td>${record.lastName}</td>
-		      <td>${record.licenseMdl.issuingState} - ${record.licenseMdl.licenseNumber}
-		      </td>
+		      <td>${record.dojoName}</td>
+		      <%-- <td>${record.lastName}</td>
+		      <td>${record.licenseMdl.issuingState} - ${record.licenseMdl.licenseNumber}</td> --%>
 		      
 				<td>
-		      		<a href= "/dojoplus/${record.id}/edit">Edit</a>
+		      		<a href= "/dojo/${record.id}/edit">Edit</a>
 		      	
-			      	<form action="/dojoplus/${record.id}" method="post">
+			      	<form action="/dojo/${record.id}" method="post">
 					    <input type="hidden" name="_method" value="delete">
 					    <input type="submit" value="Delete">
 					</form>
@@ -66,19 +65,19 @@
     
     <h2> Add new dojo</h2>
     
-    <form:form action='/dojoplus' method='post' modelAttribute='dojo'>
+    <form:form action='/dojo' method='post' modelAttribute='dojo'>
 	  
 	  <div class="form-group">
-	    <form:label path="firstName" for="firstName" >firstName</form:label>
-	     <form:input type="text" class="form-control"  path="firstName" aria-describedby="firstNameHelp" placeholder="Enter firstName"/>
-	     <p class="errorText"><form:errors path="firstName"/></p>
+	    <form:label path="dojoName" for="dojoName" >dojoName</form:label>
+	     <form:input type="text" class="form-control"  path="dojoName" />
+	     <p class="errorText"><form:errors path="dojoName"/></p>
 	  </div>
 	  
-	  <div class="form-group">
+	  <%-- <div class="form-group">
 	    <form:label path="lastName" for="lastName">lastName</form:label>
 	    <form:input type="text" class="form-control" path="lastName" placeholder="lastName here"/>
 	    <p class="errorText"><form:errors path="lastName"/></p>
-	  </div>
+	  </div> --%>
 
 	  <button type="submit" class="btn btn-primary">Submit</button>
 	</form:form> 

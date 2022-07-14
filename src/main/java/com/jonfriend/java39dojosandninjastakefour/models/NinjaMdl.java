@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
@@ -21,28 +22,27 @@ public class NinjaMdl {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @NotBlank (message="ninjaNumber required.")
-    private String ninjaNumber;
+    @NotBlank (message="firstName required.")
+    private String firstName;
     
-    private Date expirationDate;
+    @NotBlank (message="lastName required.")
+    private String lastName;
     
-    @NotBlank (message="issuingState required.")
-    private String issuingState;
+    private int age; 
     
     @Column(updatable=false)
     private Date createdAt;
     private Date updatedAt;
     
-    @OneToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="person_id")
+//    @OneToOne(fetch=FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="dojo_id")
     private DojoMdl dojoMdl;
     
     public NinjaMdl() {
         
     }
-    
 // getters and setters - start
-    
 
 	public Long getId() {
 		return id;
@@ -52,28 +52,28 @@ public class NinjaMdl {
 		this.id = id;
 	}
 
-	public String getNinjaNumber() {
-		return ninjaNumber;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setNinjaNumber(String ninjaNumber) {
-		this.ninjaNumber = ninjaNumber;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
-	public Date getExpirationDate() {
-		return expirationDate;
+	public String getLastName() {
+		return lastName;
 	}
 
-	public void setExpirationDate(Date expirationDate) {
-		this.expirationDate = expirationDate;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
-	public String getIssuingState() {
-		return issuingState;
+	public int getAge() {
+		return age;
 	}
 
-	public void setIssuingState(String issuingState) {
-		this.issuingState = issuingState;
+	public void setAge(int age) {
+		this.age = age;
 	}
 
 	public Date getCreatedAt() {

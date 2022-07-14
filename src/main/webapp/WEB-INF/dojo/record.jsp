@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>java39dojosandninjastakefour - ${dojo.firstName} ${dojo.lastName}</title>
+<title>java39dojosandninjastakefour - ${dojo.dojoName}</title>
 <meta charset="UTF-8">
 <!-- local css -->
 <link rel="stylesheet" type="text/css" href="/css/style.css">
@@ -23,15 +23,15 @@
 <body>
 	<h2>java39dojosandninjastakefour - Dojo Profile</h2>
 	<a href= "/">Home</a>
-	<a href= "/dojoplus">Dojo List</a>
-	<a href= "/dojoplus/${dojo.id}/edit">Edit</a> 
+	<a href= "/dojo">Dojo List</a>
 	
-	<h3>firstName: <c:out value="${dojo.firstName}"></c:out></h3>
-	<h4>lastName: <c:out value="${dojo.lastName}"></c:out></h4>
-	<h4>dojo.personMdl.state: <c:out value="${dojo.personMdl.state}"></c:out></h4>
-	<h4>dojo.personMdl.expirationDate: <c:out value="${dojo.personMdl.expirationDate}"></c:out></h4> 
+	<%-- <h3>firstName: <c:out value="${dojo.firstName}"></c:out></h3> --%>
+	<h4>dojoName: <c:out value="${dojo.dojoName}"></c:out></h4>
+	<%-- <h4>dojo.personMdl.state: <c:out value="${dojo.personMdl.state}"></c:out></h4>
+	<h4>dojo.personMdl.expirationDate: <c:out value="${dojo.personMdl.expirationDate}"></c:out></h4> --%> 
 
-	<form action="/dojoplus/${dojo.id}" method="post">
+	<a href= "/dojo/${dojo.id}/edit">Edit</a> 
+	<form action="/dojo/${dojo.id}" method="post">
 	    <input type="hidden" name="_method" value="delete">
 	    <input type="submit" value="Delete this dojo">
 	</form>

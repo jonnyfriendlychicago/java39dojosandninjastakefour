@@ -1,6 +1,7 @@
 package com.jonfriend.java39dojosandninjastakefour.models;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -9,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
@@ -21,25 +23,25 @@ public class DojoMdl {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
   
-    @NotBlank (message="firstName required.")
-    private String firstName;
-    
-    @NotBlank (message="lastName required.")
-    private String lastName;
+    @NotBlank (message="dojoName required.")
+    private String dojoName;
+
+//    @NotBlank (message="lastName required.")
+//    private String lastName;
     
     @Column(updatable=false)
     private Date createdAt;
     private Date updatedAt;
     
-    @OneToOne(mappedBy="dojoMdl", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-    private NinjaMdl ninjaMdl;
+//  @OneToOne(mappedBy="dojoMdl", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+    @OneToMany(mappedBy="dojoMdl", fetch = FetchType.LAZY)
+//  private NinjaMdl ninjaMdl;
+    private List<NinjaMdl> ninjaList; 
     
     public DojoMdl() {
         
     }
-    
     // getters and setters - start
-    
 
 	public Long getId() {
 		return id;
@@ -49,20 +51,12 @@ public class DojoMdl {
 		this.id = id;
 	}
 
-	public String getFirstName() {
-		return firstName;
+	public String getDojoName() {
+		return dojoName;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setDojoName(String dojoName) {
+		this.dojoName = dojoName;
 	}
 
 	public Date getCreatedAt() {
@@ -81,13 +75,15 @@ public class DojoMdl {
 		this.updatedAt = updatedAt;
 	}
 
-	public NinjaMdl getNinjaMdl() {
-		return ninjaMdl;
+	public List<NinjaMdl> getNinjaList() {
+		return ninjaList;
 	}
 
-	public void setNinjaMdl(NinjaMdl ninjaMdl) {
-		this.ninjaMdl = ninjaMdl;
+	public void setNinjaList(List<NinjaMdl> ninjaList) {
+		this.ninjaList = ninjaList;
 	}
+    
+    
     // getters and setters - end
     
 		

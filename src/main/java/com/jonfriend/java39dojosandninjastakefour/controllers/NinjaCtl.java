@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.jonfriend.java39dojosandninjastakefour.models.NinjaMdl;
-import com.jonfriend.java39dojosandninjastakefour.models.PersonMdl;
+import com.jonfriend.java39dojosandninjastakefour.models.DojoMdl;
 import com.jonfriend.java39dojosandninjastakefour.services.NinjaSrv;
-import com.jonfriend.java39dojosandninjastakefour.services.PersonSrv;
+import com.jonfriend.java39dojosandninjastakefour.services.DojoSrv;
 
 @Controller
 public class NinjaCtl {
@@ -29,7 +29,7 @@ public class NinjaCtl {
 	// JRF: below adding the AW for the pers serv
 	
 	@Autowired
-	private PersonSrv personSrvIntVar; 
+	private DojoSrv dojoSrvIntVar; 
 
 // ******************************************************************************************
 // *** ninja methods below *** (ninjaPlus methods below that) 
@@ -115,8 +115,8 @@ public class NinjaCtl {
 		List<NinjaMdl> intVar = ninjaSrv.returnAll();
 		model.addAttribute("ninjaList", intVar); 
 		// below added in prayer that drop-down now works
-		List<PersonMdl> intVar2 = personSrvIntVar.returnAll();
-		model.addAttribute("personList", intVar2); 
+		List<DojoMdl> intVar2 = dojoSrvIntVar.returnAll();
+		model.addAttribute("dojoList", intVar2); 
 		return "ninja/list.jsp"; 
 	}
 	
