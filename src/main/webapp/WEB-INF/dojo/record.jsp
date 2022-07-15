@@ -21,21 +21,52 @@
 
 </head>
 <body>
-	<h2>java39dojosandninjastakefour - Dojo Profile</h2>
-	<a href= "/">Home</a>
-	<a href= "/dojo">Dojo List</a>
+	<div id=header class="container-fluid">
+		<h1>java39dojosandninjastakefour</h1>
+		<a href= "/">Home</a>
+		<a href="/dojo">Dojo List</a>
+		<a href= "/ninja">Ninja List</a>
+		<h2>Dojo Profile</h2>
+	</div>
 	
-	<%-- <h3>firstName: <c:out value="${dojo.firstName}"></c:out></h3> --%>
-	<h4>dojoName: <c:out value="${dojo.dojoName}"></c:out></h4>
-	<%-- <h4>dojo.personMdl.state: <c:out value="${dojo.personMdl.state}"></c:out></h4>
-	<h4>dojo.personMdl.expirationDate: <c:out value="${dojo.personMdl.expirationDate}"></c:out></h4> --%> 
-
-	<a href= "/dojo/${dojo.id}/edit">Edit</a> 
-	<form action="/dojo/${dojo.id}" method="post">
-	    <input type="hidden" name="_method" value="delete">
-	    <input type="submit" value="Delete this dojo">
-	</form>
- 
-	
+	<div id=main class="container-fluid">
+		<div id=about class="container-fluid">
+			<h4>dojoName: <c:out value="${dojo.dojoName}"></c:out></h4>
+		
+			<a href= "/dojo/${dojo.id}/edit">Edit</a> 
+			<form action="/dojo/${dojo.id}" method="post">
+			    <input type="hidden" name="_method" value="delete">
+			    <input type="submit" value="Delete this dojo">
+			</form>
+		</div>
+		
+		<div id=list class="container-fluid">
+			<table class="table table-striped">
+			  <thead>
+			    <tr>
+					<th scope="col">id</th>
+			      	<th scope="col">firstName</th>
+			      	<th scope="col">lastName</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			    <c:forEach var="record" items="${dojo.ninjaList}">
+			        <tr>
+				      <td >
+				      	<a href= "/ninja/${record.id}">${record.id}</a>
+				      </td>
+				      <td>${record.firstName}</td>
+				      <td>${record.firstName}</td>
+				    </tr>
+		    	</c:forEach>  
+			  </tbody>
+			</table>
+		</div>
+	 </div>
+	 
+	 <div id=footer class="container-fluid">
+	<p class="footerText">Powered by Coding Dojo</p>
+	</div>
+		
 </body>
 </html>

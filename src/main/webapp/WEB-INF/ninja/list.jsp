@@ -24,76 +24,96 @@
 
 </head>
 <body>
-	<h1>java39dojosandninjastakefour Ninja List+</h1>
+	<div id=header class="container-fluid">
+		<h1>java39dojosandninjastakefour Ninja List</h1>
+		<a href="/">Home</a>
+		<a href="/dojo">Dojo List</a>
+		<a href="/ninja">Ninja List</a>
+		<h2>Ninja Management</h2>
+	</div>
 
-	<a href="/">Home</a>
-
-	<h2>Ninja List</h2>
-
-	<table class="table table-striped">
-		<thead>
-			<tr>
-				<th scope="col">id</th>
-				<th scope="col">firstName</th>
-				<th scope="col">lastName</th>
-				<th scope="col">dojoStuff!</th>
-				<th scope="col">actions</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach var="record" items="${ninjaList}">
-				<tr>
-					<td><a href="/ninja/${record.id}">${record.id}</a></td>
-					<td>${record.firstName}</td>
-					<td>${record.lastName}</td>
-					<td>${record.dojoMdl.dojoName} </td>
-
-
-
-					<td><a href="/ninja/${record.id}/edit">Edit</a>
-
-						<form action="/ninja/${record.id}" method="post">
-							<input type="hidden" name="_method" value="delete"> <input
-								type="submit" value="Delete">
-						</form></td>
-				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
-
-	<h2>Add new ninja</h2>
-
-	<form:form action='/ninja' method='post' modelAttribute='ninja'>
-
-		<div class="form-group">
-			<form:label path="firstName" for="firstName">firstName</form:label>
-			<form:input type="text" class="form-control" path="firstName"/>
-			<p class="errorText"><form:errors path="firstName" />
-			</p>
+	<div id=main class="container-fluid">
+		<div id=list class="container-fluid">
+	
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th scope="col">id</th>
+						<th scope="col">firstName</th>
+						<th scope="col">lastName</th>
+						<th scope="col">Dojo</th>
+						<th scope="col">Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach var="record" items="${ninjaList}">
+						<tr>
+							<td><a href="/ninja/${record.id}">${record.id}</a></td>
+							<td>${record.firstName}</td>
+							<td>${record.lastName}</td>
+							<td>${record.dojoMdl.dojoName} </td>
+		
+		
+		
+							<td><a href="/ninja/${record.id}/edit">Edit</a>
+		
+								<form action="/ninja/${record.id}" method="post">
+									<input type="hidden" name="_method" value="delete"> <input
+										type="submit" value="Delete">
+								</form></td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
 		</div>
 
-		<div class="form-group">
-			<form:label path="lastName" for="lastName">lastName</form:label>
-			<form:input type="text" class="form-control" path="lastName" />
-			<p class="errorText"><form:errors path="lastName" /></p>
+		<div id=form class="container-fluid">
+			<h2>Add new ninja</h2>
+		
+			<form:form action='/ninja' method='post' modelAttribute='ninja'>
+		
+				<div class="form-group">
+					<form:label path="firstName" for="firstName">firstName</form:label>
+					<form:input type="text" class="form-control" path="firstName"/>
+					<p class="errorText"><form:errors path="firstName" />
+					</p>
+				</div>
+		
+				<div class="form-group">
+					<form:label path="lastName" for="lastName">lastName</form:label>
+					<form:input type="text" class="form-control" path="lastName" />
+					<p class="errorText"><form:errors path="lastName" /></p>
+				</div>
+		
+				<div class="form-group">
+					<form:select path="dojoMdl">
+						<c:forEach var="record" items="${dojoList}">
+							<!--- Each option VALUE is the id of the dojo --->
+							<form:option value="${record.id}" path="dojoMdl">
+								<!--- This is what shows to the user as the option --->
+								<c:out value="${record.dojoName}" />
+							</form:option>
+						</c:forEach>
+					</form:select>
+				</div>
+		
+				<button type="submit" class="btn btn-primary">Submit</button>
+			</form:form>
+			
+			<c:choose>
+				<c:when test="${onErrorPath == 'yep' }">
+					<a href= "/ninja"><button class="btn btn-secondary">Cancel</button></a>
+				</c:when>
+				<c:otherwise>
+					<!-- <div><p>lookin good</p></div> -->
+				</c:otherwise>
+			</c:choose> 
 		</div>
+	</div>			
 
-		<div class="form-group">
-			<form:select path="dojoMdl">
-				<c:forEach var="record" items="${dojoList}">
-					<!--- Each option VALUE is the id of the dojo --->
-					<form:option value="${record.id}" path="dojoMdl">
-						<!--- This is what shows to the user as the option --->
-						<c:out value="${record.dojoName}" />
-					</form:option>
-				</c:forEach>
-			</form:select>
+
+	<div id=footer class="container-fluid">
+		<p class="footerText">Powered by Coding Dojo</p>
 		</div>
-
-		<button type="submit" class="btn btn-primary">Submit</button>
-	</form:form>
-
-
-
 </body>
 </html>

@@ -107,6 +107,9 @@ public class DojoCtl {
 	public String dojo(@ModelAttribute("dojo") DojoMdl dojoMdl , Model model) {
 		List<DojoMdl> intVar = dojoSrv.returnAll();
 		model.addAttribute("dojoList", intVar); 
+		
+		String onErrorPath = "nope"; 
+		model.addAttribute("onErrorPath", onErrorPath); 
 		return "dojo/list.jsp"; 
 	}
 	
@@ -122,6 +125,10 @@ public class DojoCtl {
 		if (result.hasErrors()) { 
             List<DojoMdl> intVar = dojoSrv.returnAll();
     		model.addAttribute("dojoList", intVar);
+    		
+    		String onErrorPath = "yep"; 
+    		model.addAttribute("onErrorPath", onErrorPath); 
+    		
     		return "dojo/list.jsp";
     		
         } else {
@@ -163,6 +170,14 @@ public class DojoCtl {
 	
     @DeleteMapping("/dojo/{dojoId}")
     public String displayAllDeleteOne(@PathVariable("dojoId") Long dojoId) {
+//    	if the count of items in dojo.NinjaMdl list is > 0, error this guy and redirect to screeen
+//    	else, yeah, whack it
+    	
+//    	DojoMdl dojoTargetedForDel = dojoSrv.findById(dojoId);
+//    	
+//    	if ( dojoTargetedForDel.NinjaMdl )
+    	
+    	
     	dojoSrv.delete(dojoId);
         return "redirect:/dojo";
     }

@@ -112,17 +112,22 @@ public class NinjaCtl {
     // display list of all records, with create form
 	@RequestMapping("/ninja")
 	public String ninja(@ModelAttribute("ninja") NinjaMdl ninjaMdl , Model model) {
-		List<NinjaMdl> intVar = ninjaSrv.returnAll();
-		model.addAttribute("ninjaList", intVar); 
-		// below added in prayer that drop-down now works
+        // records in table
+		List<NinjaMdl> intVar1 = ninjaSrv.returnAll();
+		model.addAttribute("ninjaList", intVar1); 
+		// records in 'add-new' dropdown
 		List<DojoMdl> intVar2 = dojoSrvIntVar.returnAll();
 		model.addAttribute("dojoList", intVar2); 
+		
+		String onErrorPath = "nope"; 
+		model.addAttribute("onErrorPath", onErrorPath); 
+		
 		return "ninja/list.jsp"; 
 	}
 	
 	// display list, then process the new 
 	@PostMapping("/ninja") 
-	public String ninjaplus(
+	public String ninja(
 		@Valid 
 		@ModelAttribute("ninja") NinjaMdl ninjaMdl 
 		, BindingResult result
@@ -130,12 +135,24 @@ public class NinjaCtl {
 		
 	) {
 		if (result.hasErrors()) { 
-            List<NinjaMdl> intVar = ninjaSrv.returnAll();
-    		model.addAttribute("ninjaList", intVar);
+            // records in table
+			List<NinjaMdl> intVar1 = ninjaSrv.returnAll(); 
+    		model.addAttribute("ninjaList", intVar1);
+    		// records in 'add-new' dropdown
+    		List<DojoMdl> intVar2 = dojoSrvIntVar.returnAll();
+    		model.addAttribute("dojoList", intVar2); 
+    		
+
+    		String onErrorPath = "yep"; 
+    		model.addAttribute("onErrorPath", onErrorPath); 
+    		
     		return "ninja/list.jsp";
     		
         } else {
-        	ninjaSrv.createNew(ninjaMdl);
+//        	boolean onErrorPath = false; 
+//    		model.addAttribute("onErrorPath", onErrorPath); 
+    		
+    		ninjaSrv.createNew(ninjaMdl);
             return "redirect:/ninja";
         }
 	}
@@ -143,26 +160,48 @@ public class NinjaCtl {
 	// display list while editting a record
 	// edit record: initiate it!
 	@RequestMapping("/ninja/{ninjaId}/edit")
-	public String displayAllEditOne(@PathVariable("ninjaId") Long ninjaId, Model model) {
+	public String ninjaEdit(@PathVariable("ninjaId") Long ninjaId, Model model) {
 		
-		List<NinjaMdl> intVar2 = ninjaSrv.returnAll();
-		model.addAttribute("ninjaList", intVar2); 
+        // records in table
+		List<NinjaMdl> intVar1 = ninjaSrv.returnAll();
+		model.addAttribute("ninjaList", intVar1); 
 		
-		NinjaMdl intVar = ninjaSrv.findById(ninjaId); 
-		model.addAttribute("ninja", intVar);  
+		// pre-populates the values in the 'manage-one' interface
+		NinjaMdl intVar2 = ninjaSrv.findById(ninjaId); 
+		model.addAttribute("ninja", intVar2);  
+		
+		// records in 'manage-one' interface dropdown
+		List<DojoMdl> intVar3 = dojoSrvIntVar.returnAll();
+		model.addAttribute("dojoList", intVar3); 
+		
 		return "ninja/edit.jsp";
+		
+
 	}
 	
 	// edit record: finalize/save it (or get kicked back b/c errors)
 	@PostMapping("/ninja/{ninjaId}/edit")
-	public String displayAllEditOne(
+	public String ninjaEdit(
 			@Valid 
 			@ModelAttribute("ninja") NinjaMdl ninjaMdl 
 			, BindingResult result
 			, Model model) {
 		if (result.hasErrors()) {
+			
+//			List<NinjaMdl> intVar2 = ninjaSrv.returnAll();
+//			model.addAttribute("ninjaList", intVar2); 
+			
 			List<NinjaMdl> intVar2 = ninjaSrv.returnAll();
 			model.addAttribute("ninjaList", intVar2); 
+			
+//			NinjaMdl intVar = ninjaSrv.findById(ninjaId); 
+//			model.addAttribute("ninja", intVar);  
+			
+			// below added in prayer that drop-down now works
+			List<DojoMdl> intVar3 = dojoSrvIntVar.returnAll();
+			model.addAttribute("dojoList", intVar3); 
+			
+			
 			return "ninja/edit.jsp";
 		} else {
 			ninjaSrv.update(ninjaMdl);

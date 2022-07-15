@@ -28,6 +28,7 @@
 	<a href= "/books">Books</a>
 	<a href= "/expenses">Expenses</a>
 	<a href= "/expensesAndCreate">expensesAndCreate</a>
+	<a href= "/dojo">Ninjas and Dojos</a>
 	
 	<h2>Ninja Gold - We've been here before!</h2>
 	

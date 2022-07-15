@@ -21,21 +21,29 @@
 
 </head>
 <body>
-	<h2>java39dojosandninjastakefour - Ninja Profile</h2>
-	<a href= "/">Home</a>
-	<a href= "/ninjaplus">Ninja List</a>
-	<a href= "/ninjaplus/${ninja.id}/edit">Edit</a> 
-	
-	<h3>firstName: <c:out value="${ninja.firstName}"></c:out></h3>
-	<h4>lastName: <c:out value="${ninja.lastName}"></c:out></h4>
-	<h4>ninja.ninjaMdl.state: <c:out value="${ninja.ninjaMdl.state}"></c:out></h4>
-	<h4>ninja.ninjaMdl.expirationDate: <c:out value="${ninja.ninjaMdl.expirationDate}"></c:out></h4> 
-
-	<form action="/ninjaplus/${ninja.id}" method="post">
-	    <input type="hidden" name="_method" value="delete">
-	    <input type="submit" value="Delete this ninja">
-	</form>
+	<div id=header class="container-fluid">
+		<h1>java39dojosandninjastakefour</h1>
+		<a href= "/">Home</a>
+		<a href="/dojo">Dojo List</a>
+		<a href= "/ninja">Ninja List</a>
+		<h2>Ninja Profile</h2>
+	</div>
+	<div id=main class="container-fluid">
+		<div id=about class="container-fluid">
+			<h4>firstName: <c:out value="${ninja.firstName}"></c:out></h4>
+			<h4>lastName: <c:out value="${ninja.lastName}"></c:out></h4>
+			<h4>ninja.dojoMdl.dojoName: <c:out value="${ninja.dojoMdl.dojoName}"></c:out></h4> 
+			<a href= "/ninja/${ninja.id}/edit">Edit</a> 
+			<form action="/ninja/${ninja.id}" method="post">
+			    <input type="hidden" name="_method" value="delete">
+			    <input type="submit" value="Delete this ninja">
+			</form>
+		</div>
+	</div>
  
+ 	<div id=footer class="container-fluid">
+	<p class="footerText">Powered by Coding Dojo</p>
+	</div>
 	
 </body>
 </html>
